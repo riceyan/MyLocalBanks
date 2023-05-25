@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnDBS, btnOCBC, btnUOB;
 
+    String wordClicked = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,28 +29,6 @@ public class MainActivity extends AppCompatActivity {
         registerForContextMenu(btnDBS);
         registerForContextMenu(btnOCBC);
         registerForContextMenu(btnUOB);
-
-        btnDBS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + "18001111111"));
-                startActivity(intentCall);
-            }
-        });
-        btnOCBC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + "18003633333"));
-                startActivity(intentCall);
-            }
-        });
-        btnUOB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + "18002222121"));
-                startActivity(intentCall);
-            }
-        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,8 +60,52 @@ public class MainActivity extends AppCompatActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.add(0, 0, 0, "Website");
+        menu.add(0, 1, 1, "Contact the bank");
+
+        if (v == btnDBS) {
+            wordClicked = "DBS";
+        } else if (v == btnOCBC) {
+            wordClicked = "OCBC";
+        } else if (v == btnUOB) {
+            wordClicked = "UOB";
+        }
 
     }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (wordClicked.equalsIgnoreCase("DBS")) {
+            if (item.getItemId() == 0) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.dbs.com.sg"));
+                startActivity(intent);
+
+            } else if (item.getItemId() == 1) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "18001111111"));
+                startActivity(intentCall);
+            }
+
+        } else if (wordClicked.equalsIgnoreCase("OCBC")) {
+            if (item.getItemId() == 0) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ocbc.com"));
+                startActivity(intent);
+
+            } else if (item.getItemId() == 1) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "18003633333"));
+                startActivity(intentCall);
+            }
+
+        } else if (wordClicked.equalsIgnoreCase("UOB")) {
+            if (item.getItemId() == 0) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.uob.com.sg"));
+                startActivity(intent);
+
+            } else if (item.getItemId() == 1) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "18002222121"));
+                startActivity(intentCall);
+            }
+        }
+        return super.onContextItemSelected(item);
+    }
+
 
 }

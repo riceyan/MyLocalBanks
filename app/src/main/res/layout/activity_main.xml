@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:backgroundTint="#FFFFFF"
         android:text="@string/DBS" />
 
     <Button
@@ -19,12 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/OCBC" />
+        android:backgroundTint="#D62E2E"
+        android:text="@string/OCBC"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/buttonUOB"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/UOB" />
+        android:backgroundTint="#0B61E1"
+        android:text="@string/UOB"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
